@@ -1,1 +1,1 @@
-# sqlite_edict
+英和辞書作成
