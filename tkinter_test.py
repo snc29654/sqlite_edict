@@ -1,4 +1,4 @@
-######　　2021.05．25　edict-1へ移動　######################################################
+######　　2021.05．25　文字なしで空白を出力　######################################################
 import tkinter
 import json
 import sqlite3
@@ -29,6 +29,9 @@ def btn_click(key):
 
         get_data =txt.get() + key
     match_word = get_data
+    if match_word =="":
+        textExample.delete("1.0",tkinter.END)
+        return
 
     with closing(sqlite3.connect(dbname)) as conn:
         c = conn.cursor()
