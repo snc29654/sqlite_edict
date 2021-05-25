@@ -1,4 +1,4 @@
-######　　2021.05．25　正常動作確認　　######################################################
+######　　2021.05．25　edict-1へ移動　######################################################
 import tkinter
 import json
 import sqlite3
@@ -10,24 +10,13 @@ root = tkinter.Tk()
 def input_key(event):
     btn_click(event.keysym)
 
-
-
-
 def getTextInput():
     result=textExample.get("1.0","end")
     print(result)
 
-
-
-
-
-
 textExample=tkinter.Text(root, height=10)
 textExample.pack()
 textExample.place(x=90, y=40)
-
-
-
 
 # clickイベント
 def btn_click(key):
@@ -41,9 +30,6 @@ def btn_click(key):
         get_data =txt.get() + key
     match_word = get_data
 
-
-
-
     with closing(sqlite3.connect(dbname)) as conn:
         c = conn.cursor()
         create_table = '''create table items (item_id INTEGER PRIMARY KEY,word TEXT,mean TEXT,level INTEGER DEFAULT 0)'''
@@ -52,86 +38,49 @@ def btn_click(key):
         except:
             print("database already exist")
 
-
-
-
         #全レコード表示
 
-
         select_sql = 'select * from items where word = '+'"'+str(match_word)+'"'
-
-
-
 
         data=[]
         print (select_sql )
         try:
 
-
             for row in c.execute(select_sql):
                 print(row)
                 data.append(row)
 
-
             conn.commit()
-
 
         except:
 
-
             print("data not found")
-
-
-
-
-
 
     textExample.delete("1.0",tkinter.END)
 
-
     textExample.insert(tkinter.END,data)
-
-
-
-
-
-
 # ボタン
 btn = tkinter.Button(root, text='引く', command=btn_click)
 btn.place(x=10, y=80)
-
-
-
-
 # 画面サイズ
 root.geometry('700x200')
 # 画面タイトル
 root.title('英和辞書')
-
-
 # ラベル
 lbl = tkinter.Label(text='英単語')
 lbl.place(x=10, y=10)
 
-
 lbl2 = tkinter.Label(text='意味')
 lbl2.place(x=10, y=50)
-
 
 # テキストボックス
 txt = tkinter.Entry(width=20)
 txt.place(x=90, y=10)
 txt.insert(tkinter.END,"")
 
-
 txt.pack()
 txt.bind("<KeyPress>", input_key)
 txt.focus_set()
-
-
-
-
-
 
 # 表示
 root.mainloop()
