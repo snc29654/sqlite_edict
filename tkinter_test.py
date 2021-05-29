@@ -3,7 +3,7 @@ import tkinter
 import json
 import sqlite3
 from contextlib import closing
-dbname = 'ejdict.sqlite3'
+dbname = '../ejdict.sqlite3'
 
 
 root = tkinter.Tk()
